@@ -17,11 +17,11 @@ function relativeDate(input: Date) {
 	}
 }
 
-export default class TweetItem extends React.Component {
+
+export default class ContratosItem extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-
 
 	render() {
 		const tweet = this.props.tweet;

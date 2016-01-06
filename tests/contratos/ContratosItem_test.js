@@ -3,9 +3,9 @@ import React from 'react/addons';
 import {expect} from 'chai';
 import rewire from 'rewire';
 
-import setup from './setup';
+import setup from './../setup';
 
-const TweetItem = rewire('../src/TweetItem');
+const TweetItem = rewire('../../src/contratos/ContratosItem');
 
 const TEST_TWEET = {
 	id: 'tweet-1',
@@ -23,7 +23,6 @@ describe('TweetItem', () => {
 		const item = React.addons.TestUtils.renderIntoDocument(
 			<TweetItem tweet={tweet}/>
 		);
-
 
 		const userIcon = React.findDOMNode(item.refs.userIcon);
 		const userDescription = React.findDOMNode(item.refs.userDescription);

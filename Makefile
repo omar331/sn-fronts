@@ -1,6 +1,6 @@
 MOCHA_ARGS=--compilers js:babel-core/register --require tests/setup.js
-SRC_FILES=$(wildcard src/*.js) webpack.config.js
-TEST_FILES=$(wildcard tests/*.js)
+SRC_FILES=$(wildcard src/*.js)  webpack.config.js
+TEST_FILES=$(shell find tests/ -name '*.js')
 NODE_BIN=$(PWD)/node_modules/.bin
 
 all: dist/app.bundle.js dist/tests.bundle.js
