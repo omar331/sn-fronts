@@ -2,7 +2,6 @@ import fetch from './fetch';
 import {Actions} from 'flummox';
 
 const TWITTER_FEED_URL = 'data/tweets.js';
-
 export default class FeedActions extends Actions {
 	fetchTimeline() {
 		return fetch(TWITTER_FEED_URL).then(res => {

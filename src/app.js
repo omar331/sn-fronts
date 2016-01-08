@@ -19,6 +19,7 @@ class AppFlux extends Flux {
 	}
 }
 
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -45,6 +46,7 @@ flux.fetchInitialData();
 flux.addListener('dispatch', action => {
 	console.log('dispatching', action.actionId);
 });
+
 
 var content = document.getElementById('app');
 React.render(<App flux={flux}/>, content);

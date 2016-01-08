@@ -24,25 +24,30 @@ export default class ContratosItem extends React.Component {
 	}
 
 	render() {
-		const tweet = this.props.tweet;
-		const dateString = relativeDate(new Date(Date.parse(tweet.createdAt)));
+		const contrato = this.props.contrato;
 
-		return <div className={classNames({
-			'tweet-item': true,
-			'tweet-item-selected': this.props.isSelected
+		return <tr className={classNames({
+			'contratos-item': true,
+			'contratos-item-selected': this.props.isSelected
 		})}
 			ref="container"
 			onClick={this.props.onClick}
 		>
-			<div>
-				<img className='tweet-item-user-icon' ref="userIcon" src={tweet.user.icon}/>
-			</div>
-			<div className='tweet-item-details'>
-				<span className='tweet-item-user-description' ref="userDescription">{tweet.user.description}</span>
-				<span className='tweet-item-user-screen-name' ref="userScreenName">@{tweet.user.screenName}</span>
-				<span className='tweet-item-date' ref="date"> - {dateString}</span>
-				<div className='tweet-item-text' ref="text">{tweet.text}</div>
-			</div>
-		</div>;
+			<td>
+				<span className='contratos-item-id' ref="contratoId">{contrato.id}</span>
+			</td>
+			<td>
+				<span className='contratos-item-razao-social' ref="entidadeRazaoSocial">{contrato.entidade.razao_social}</span>
+			</td>
+			<td>
+				<span ref="inicioEm">{contrato.inicio_em_fmt}</span>
+			</td>
+			<td>
+				<span ref="terminoEm">{contrato.termino_em_fmt}</span>
+			</td>
+			<td>
+				<span ref="taxaLicenciamentoLiquido">{contrato.taxa_licenciamento_liquido_fmt}</span>
+			</td>
+		</tr>;
 	}
 }
