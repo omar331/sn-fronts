@@ -18,4 +18,4 @@ test-watch:
 	$(NODE_BIN)/mocha $(MOCHA_ARGS) --watch $(TEST_FILES)
 
 serve:
-	$(NODE_BIN)/webpack-dev-server --hot --quiet
+	$(NODE_BIN)/webpack-dev-server --watch --watch-polling

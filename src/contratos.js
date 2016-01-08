@@ -1,21 +1,25 @@
 import {Flux} from 'flummox';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import {Table, Column, Cell} from 'fixed-data-table';
 
-import FeedActions from './FeedActions';
-import StatusView from './StatusView';
-import TweetListContainer from './TweetListContainer';
-import TweetStore from './TweetStore';
+import ContratosActions from './contratos/ContratosActions';
+import ContratosStore from './contratos/ContratosStore';
+
+import SortExample from './SortExample';
+
+
 
 class AppFlux extends Flux {
 	constructor() {
 		super();
 
-		this.createActions('tweets', FeedActions);
-		this.createStore('tweets', TweetStore, this);
+		this.createActions('contratos', ContratosActions);
+		this.createStore('contratos', ContratosStore, this);
 	}
 
 	fetchInitialData() {
-		this.getActions('tweets').fetchTimeline();
+		this.getActions('contratos').getItems();
 	}
 }
 
@@ -32,10 +36,7 @@ class App extends React.Component {
 	render() {
 		return <div className="app">
 			<div className="app-center-column">
-				<StatusView flux={this.props.flux} />---
-				<TweetListContainer flux={this.props.flux} onSelect={tweet =>
-					this.setState({selectedTweet: tweet})
-				}/>
+				*** contratos ****
 			</div>
 		</div>
 	}
@@ -49,4 +50,12 @@ flux.addListener('dispatch', action => {
 
 
 var content = document.getElementById('app');
-React.render(<App flux={flux}/>, content);
+//React.render(<App flux={flux}/>, content);
+
+
+
+// Render your table
+ReactDOM.render(
+	<SortExample/>,
+	content
+);

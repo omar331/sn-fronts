@@ -3,7 +3,7 @@ var RewirePlugin = require('rewire-webpack');
 module.exports = {
 	entry: {
 		app: ['./src/app', 'webpack/hot/dev-server'],
-		app: ['./src/app', 'webpack/hot/dev-server-yeah'],
+		contratos: ['./src/contratos', 'webpack/hot/dev-server'],
 		tests: ['./tests/tests', 'webpack/hot/dev-server']
 	},
 	output: {
