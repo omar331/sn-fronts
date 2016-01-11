@@ -32,7 +32,7 @@ class App extends React.Component {
 	render() {
 		return <div className="app">
 			<div className="app-center-column">
-				<StatusView flux={this.props.flux} />---
+				<StatusView flux={this.props.flux} />
 				<TweetListContainer flux={this.props.flux} onSelect={tweet =>
 					this.setState({selectedTweet: tweet})
 				}/>

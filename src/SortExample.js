@@ -77,7 +77,7 @@ class DataListWrapper {
 
     getObjectAt(index) {
         return this._data.getObjectAt(
-            this._indexMap[index],
+            this._indexMap[index]
         );
     }
 }
@@ -103,6 +103,8 @@ class SortExample extends React.Component {
     }
 
     _onSortChange(columnKey, sortDir) {
+        console.log(' _onSortChange = %s %s', columnKey, sortDir);
+
         var sortIndexes = this._defaultSortIndexes.slice();
         sortIndexes.sort((indexA, indexB) => {
             var valueA = this._dataList.getObjectAt(indexA)[columnKey];
@@ -131,6 +133,7 @@ class SortExample extends React.Component {
 
     render() {
         var {sortedDataList, colSortDirs} = this.state;
+
         return (
             <Table
                 rowHeight={50}
