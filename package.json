@@ -13,6 +13,7 @@
   "author": "Robert Knight <robertknight@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "ajax": "0.0.4",
     "bootstrap": "^3.3.6",
     "classnames": "^1.2.0",
     "cors": "^2.5.3",
@@ -37,6 +38,7 @@
     "faker": "^3.0.1",
     "gulp": "^3.8.11",
     "htmlparser": "^1.7.7",
+    "jquery-mockjax": "^2.0.1",
     "jsdom": ">=4.0.2",
     "mocha": "^2.2.1",
     "mocha-loader": "^0.7.1",

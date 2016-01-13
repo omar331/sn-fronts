@@ -6,16 +6,50 @@ class ContratosList extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			selectedTweet: null
-		};
+		this.flux = props.flux;
+	}
+
+
+
+	componentDidMount() {
+		this.updateItemsFromStore();
+
+
+		this.flux.addListener('dispatch', action => {
+
+			// ---> items foram atualizados
+			if ( action.actionId.match(/queryItems/) ) {
+				this.updateItemsFromStore();
+			}
+		});
+	}
+
+
+	/**
+	 * Atualiza os itens a partir da store
+	 */
+	updateItemsFromStore() {
+		this.setState({
+			items: this.flux.getStore('contratos').getItems()
+		});
 	}
 
 	render() {
+		console.log( "st");
+		if ( this.state == null ) {
+			return (<div></div>);
+		}
+
+
+
+		var rows = this.state.items;
+
+		console.log("itens =%o", rows);
+
 		return (
 			<Table
 				rowHeight={50}
-				rowsCount={this.props.rows.length}
+				rowsCount={rows.length}
 				width={1200}
 				height={5000}
 				headerHeight={50}>
@@ -23,7 +57,7 @@ class ContratosList extends React.Component {
 					header={<Cell>ID</Cell>}
 					cell={({rowIndex, ...props}) => (
 							<Cell {...props}>
-							  {this.props.rows[rowIndex].id}
+							  {rows[rowIndex].id}
 							</Cell>
 						)}
 					width={100}
@@ -33,7 +67,7 @@ class ContratosList extends React.Component {
 					header={<Cell>Entidade</Cell>}
 					cell={({rowIndex, ...props}) => (
 							<Cell {...props}>
-							  {this.props.rows[rowIndex].entidade.nome_fantasia}
+							  {rows[rowIndex].entidade.nome_fantasia}
 							</Cell>
 						)}
 					width={250}
@@ -43,7 +77,7 @@ class ContratosList extends React.Component {
 					header={<Cell>Início</Cell>}
 					cell={({rowIndex, ...props}) => (
 							<Cell {...props}>
-							  {this.props.rows[rowIndex].inicio_em_fmt}
+							  {rows[rowIndex].inicio_em_fmt}
 							</Cell>
 						)}
 					width={100}
@@ -53,7 +87,7 @@ class ContratosList extends React.Component {
 					header={<Cell>Término</Cell>}
 					cell={({rowIndex, ...props}) => (
 							<Cell {...props}>
-							  {this.props.rows[rowIndex].termino_em_fmt}
+							  {rows[rowIndex].termino_em_fmt}
 							</Cell>
 						)}
 					width={100}
@@ -62,7 +96,7 @@ class ContratosList extends React.Component {
 					header={<Cell>Licença $</Cell>}
 					cell={({rowIndex, ...props}) => (
 							<Cell {...props}>
-							  {this.props.rows[rowIndex].taxa_licenciamento_liquido_fmt}
+							  {rows[rowIndex].taxa_licenciamento_liquido_fmt}
 							</Cell>
 						)}
 					width={100}
@@ -71,7 +105,7 @@ class ContratosList extends React.Component {
 					header={<Cell>Parc.</Cell>}
 					cell={({rowIndex, ...props}) => (
 							<Cell {...props}>
-							  {this.props.rows[rowIndex].parcelas}
+							  {rows[rowIndex].parcelas}
 							</Cell>
 						)}
 					width={60}

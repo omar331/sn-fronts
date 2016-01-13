@@ -4,11 +4,30 @@ import ReactDOM from 'react-dom';
 import {Table, Column, Cell} from 'fixed-data-table';
 
 import ContratosManager from './contratos/ContratosManager';
+import ContratosActions from './contratos/ContratosActions';
+import ContratosStore from './contratos/ContratosStore';
 
-var content = document.getElementById('app');
 
 
-const TEST_CONTRATOS = [
+
+
+
+
+class AppFlux extends Flux {
+	constructor() {
+		super();
+
+		this.createActions('contratos', ContratosActions);
+		this.createStore('contratos', ContratosStore, this);
+	}
+
+	fetchInitialData(items) {
+		this.getActions('contratos').getItems(items);
+	}
+}
+
+
+var TEST_ITENS = [
 	{
 		id: 'contrato-1',
 		entidade: {
@@ -84,6 +103,12 @@ const TEST_CONTRATOS = [
 ];
 
 
-var content = document.getElementById('app');
-ReactDOM.render(<ContratosManager rows={TEST_CONTRATOS}/>, content);
+var flux = new AppFlux();
+flux.fetchInitialData(TEST_ITENS);
+flux.addListener('dispatch', action => {
+	console.log('dispatching', action.actionId);
+});
 
+
+var content = document.getElementById('app');
+ReactDOM.render(<ContratosManager flux={flux}/>, content);
