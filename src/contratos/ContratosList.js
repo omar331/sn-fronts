@@ -19,6 +19,7 @@ class ContratosList extends React.Component {
 
 			// ---> items foram atualizados
 			if ( action.actionId.match(/queryItems/) ) {
+				console.log("bbbbbbb");
 				this.updateItemsFromStore();
 			}
 		});

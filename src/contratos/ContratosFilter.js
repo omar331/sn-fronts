@@ -16,7 +16,7 @@ var ContratosFilter = React.createClass( {
 
 		this.entidades = this.store.getEntidades();
 
-		return {filters: this.store.getFilter()};
+		return {filters: this.store.getFilters()};
 	},
 
 	handleChange: function(property, value) {
@@ -28,8 +28,26 @@ var ContratosFilter = React.createClass( {
 
 	handleFiltrar: function(e) {
 		var filters = this.state.filters;
-		this.actions.queryItems(filters);
+		this.actions.queryItems( this.prepareFiltersForQuery(filters) );
 	},
+
+
+
+	prepareFiltersForQuery: function(filters) {
+		var prepared = {};
+
+		prepared.vigenciaInicioEmDe = filters['vigenciaInicioEmDe'] != null ? filters['vigenciaInicioEmDe'].format('YYYY-MM-DD') : null;
+		prepared.vigenciaInicioEmAte = filters['vigenciaInicioEmAte'] != null ? filters['vigenciaInicioEmAte'].format('YYYY-MM-DD') : null;
+		prepared.vigenciaTerminoEmDe = filters['vigenciaTerminoEmDe'] != null ? filters['vigenciaTerminoEmDe'].format('YYYY-MM-DD') : null;
+		prepared.vigenciaTerminoEmAte = filters['vigenciaTerminoEmAte'] != null ? filters['vigenciaTerminoEmAte'].format('YYYY-MM-DD') : null;
+		prepared.encerradoEmDe = filters['encerradoEmDe'] != null ? filters['encerradoEmDe'].format('YYYY-MM-DD') : null;
+		prepared.encerradoEmAte = filters['encerradoEmAte'] != null ? filters['encerradoEmAte'].format('YYYY-MM-DD') : null;
+		prepared.entidade = filters['entidade'];
+
+		return prepared;
+	},
+
+
 
 	render: function() {
 		return (
@@ -86,9 +104,9 @@ var ContratosFilter = React.createClass( {
 							<label>Entidade</label>
 							<Select
 								name="form-field-name"
-								value={this.state.filters.entidadeId}
+								value={this.state.filters.entidade}
 								options={this.entidades}
-								onChange={this.handleChange.bind(this, 'entidadeId')}
+								onChange={this.handleChange.bind(this, 'entidade')}
 								/>
 						</Col>
 
