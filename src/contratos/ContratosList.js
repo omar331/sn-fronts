@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Table, Column, Cell} from 'fixed-data-table';
+import { Button, form } from 'react-bootstrap';
 
 class ContratosList extends React.Component {
 	constructor(props) {
@@ -8,7 +9,6 @@ class ContratosList extends React.Component {
 
 		this.flux = props.flux;
 	}
-
 
 
 	componentDidMount() {
@@ -19,12 +19,19 @@ class ContratosList extends React.Component {
 
 			// ---> items foram atualizados
 			if ( action.actionId.match(/queryItems/) ) {
-				console.log("bbbbbbb");
 				this.updateItemsFromStore();
 			}
 		});
 	}
 
+	handleRenovarClicked(contratoId) {
+
+		this.flux.dispatch(
+			"btRenovarClicked",
+			{
+			contratoId: contratoId
+		});
+	}
 
 	/**
 	 * Atualiza os itens a partir da store
@@ -110,6 +117,15 @@ class ContratosList extends React.Component {
 							</Cell>
 						)}
 					width={60}
+					/>
+				<Column
+					header={<Cell>...</Cell>}
+					cell={({rowIndex, ...props}) => (
+							<Cell {...props}>
+								<Button bsStyle="primary" onClick={this.handleRenovarClicked.bind(this, rows[rowIndex].id)}>renovar</Button>
+							</Cell>
+						)}
+					width={250}
 					/>
 			</Table>
 		);

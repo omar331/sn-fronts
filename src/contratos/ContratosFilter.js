@@ -13,10 +13,7 @@ var ContratosFilter = React.createClass( {
 		this.store = this.props.flux.getStore('contratos');
 		this.actions = this.props.flux.getActions('contratos');
 
-
-		this.entidades = this.store.getEntidades();
-
-		return {filters: this.store.getFilters()};
+		return {filters: this.store.getFilters(), entidades: this.store.getEntidades()};
 	},
 
 	handleChange: function(property, value) {
@@ -47,6 +44,49 @@ var ContratosFilter = React.createClass( {
 		return prepared;
 	},
 
+
+	queryEntidades: function(input, callback) {
+		var p;
+
+		console.log("Filter queryEntidades input=%o", input);
+
+		p = this.actions.entidadesApiClient.get({q: input});
+
+		p.then(
+			function(response) {
+				var options = [];
+
+				if ( response.hasOwnProperty('data') ) {
+					var data = response.data;
+					for( var i = 0; i < data.length; i++ ) {
+						options.push({value: data[i].id, label: data[i].nome_fantasia });
+					}
+				}
+
+				return options;
+			}
+		).then(
+			function(options) {
+
+
+				var data = {
+					options: options,
+					complete: true,
+				};
+				setTimeout(function() {
+					callback(null, data);
+				}, 500);
+
+
+				console.log(" data = %o", data);
+
+				return options;
+			}
+		);
+
+
+		console.log("aaaaaaaa    %o a", p);
+	},
 
 
 	render: function() {
@@ -105,7 +145,7 @@ var ContratosFilter = React.createClass( {
 							<Select
 								name="form-field-name"
 								value={this.state.filters.entidade}
-								options={this.entidades}
+								asyncOptions={this.queryEntidades }
 								onChange={this.handleChange.bind(this, 'entidade')}
 								/>
 						</Col>

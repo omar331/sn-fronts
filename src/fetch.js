@@ -1,10 +1,11 @@
 // wrapper around browser and Node-specific polyfills
 // for the fetch() API
-
+var fetch;
 if (process.browser) {
 	require('whatwg-fetch');
-	module.exports = self.fetch;
+	fetch = self.fetch;
 } else {
-	module.exports = require('node-fetch');
+	fetch = require('node-fetch');
 }
 
+module.exports = fetch;

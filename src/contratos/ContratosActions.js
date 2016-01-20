@@ -1,11 +1,14 @@
 import {Actions} from 'flummox';
 
-const TWITTER_FEED_URL = 'data/tweets.js';
 export default class ContratosActions extends Actions {
 	setAPIClient(client) {
 		this.apiClient = client;
 	}
 
+
+	setEntidadesAPIClient(client) {
+		this.entidadesApiClient = client;
+	}
 
 	getItems(items) {
 		var ret;
@@ -28,10 +31,16 @@ export default class ContratosActions extends Actions {
 	 * @returns promisse para obtenção dos itens
 	 */
 	queryItems(filters) {
-		console.log("   prepared filters = %o", filters);
+		console.log("  contratos prepared filters = %o", filters);
 
 
 		var xhr = this.apiClient.get(filters);
+		return xhr;
+	}
+
+
+	queryEntidades(filters) {
+		var xhr = this.entidadesApiClient.get(filters);
 		return xhr;
 	}
 }

@@ -83,3 +83,38 @@ $.mockjax({
     responseText: {data: CONTRATOS_ITEMS },
     responseTime: 1000
 });
+
+
+
+
+/*
+ ************ MOCKUP PARA ENTIDADES **********
+ */
+var ENTIDADE_ITENS = [
+    {
+        id: 1,
+        nome_fantasia: 'Nucleo Batuira',
+        razao_social: 'Nucleo Batuira Ltda'
+    },
+    {
+        id: 2,
+        nome_fantasia: 'Casa da Criança Paralitica',
+        razao_social: 'Casa da Criança Paralítica Ltda.'
+    },
+    {
+        id: 3,
+        nome_fantasia: 'Casa Amor ao Próximo',
+        razao_social: 'Casa Amor Ao Próximo Ltda.'
+    },
+
+
+];
+
+
+$.mockjax({
+    url: '/api/v1/entidades',
+    dataType: 'json',
+    contentType: 'text/json',
+    responseText: {data: ENTIDADE_ITENS },
+    responseTime: 1000
+});

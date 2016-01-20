@@ -15,6 +15,10 @@ class ContratosFlux extends Flux {
         this.getActions('contratos').setAPIClient(client);
     }
 
+    setEntidadesAPIClient( client ) {
+        this.getActions('contratos').setEntidadesAPIClient(client);
+    }
+
 
     fetchInitialData(items) {
         this.getActions('contratos').getItems(items);
